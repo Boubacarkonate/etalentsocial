@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> {# meta pour responsive #}
+    <title>{% block title %}e-talent, emploi du social et médico-social{% endblock %}</title>
+    <meta name="description"
+        content=" Optimiser vos recherches d'emploi ou vos recrutements dans le secteur social et médico social ">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+    {% block stylesheets %}
+    {% endblock %}
+    {# voir les differents emplacements des links pour fonctionnement #}
+
+    <!--voir libairie line-awesone = fontawesone-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {# lien bootstrap 5 #}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    {# lien stripe #}
+
+    {# lien css #}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <script src="https://js.stripe.com/v3/"></script>
+
+    {% block javascripts %}
+    {% endblock %}
+</head>
+
+<body>
+
+   <div class="container-fluid px-0"> 
+        <header>
+
+            <nav class="navHeader">
+                <div class="logo"><a href="{{ path('app_home') }}"><img src="{{ asset('media/logo.png') }}"
+                            alt="logo"></a>
+                </div>
+
+                <div class="menu">
+                    <ul>
+
+                        <li>
+                            {% if is_granted('ROLE_ADMIN')==true %}
+                            <a href=" {{ path('app_admin_dashboard') }}">admin</a>
+                        </li>
+                        {% endif %}
+
+                        <li>
+
+                            <a href="{{ path('app_area_recruteur') }}">recruteur</a>
+                        </li>
+
+                        <li>
+                            <a href="{{ path('app_area_candidat') }}">candidat</a>
+                        </li>
+
+                        <li>
+                            {% if is_granted('ROLE_USER')==false %}
+                            <a href=" {{ path('app_login') }}">connexion</a>
+                            {% else  %}
+                            <a href=" {{ path('app_logout') }}">déconnexion</a>
+                            {% endif %}
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+
+            <nav class="responsive">
+                <div class="sidenavBase ">
+                    <button class="btn bg-transparent " type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i
+                            class="fa-solid fa-bars"></i></button>
+
+                    <div class="offcanvas offcanvas-start bg-secondary" data-bs-scroll="true" tabindex="-1"
+                        id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel"><img
+                                    src="{{ asset('media/logo.png') }}" alt="logo"></a></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <ul>
+                                <li><a href="{{ path('app_home') }}">HOME</a></li>
+
+
+
+
+                                {% if is_granted('ROLE_USER')==false %}
+
+                                <li><a href=" {{ path('app_login') }}">Connexion</li>
+                               
+
+                                {% endif %}
+                                {% if is_granted('ROLE_USER') %}
+                                <li>
+                                    <a href=" {{ path('app_logout') }}">Déconnexion
+                                </li>
+                                
+                                {% endif %}
+
+
+                                <li><a href="{{ path('app_area_candidat') }}">Candidat</a></li>
+
+                                <li><a href="{{ path('app_area_recruteur') }}">Recruteur</a></li>
+
+                                {% if is_granted('ROLE_USER_RECRUTEUR')%}
+                                <li> <a href="{{ path('app_cart_show') }}">Panier</li></a>
+                                {% endif %}
+                                </li>
+
+                                <li><a href="{{ path('app_contact') }}">Contact</a></li>
+
+                                <li> {% if is_granted('ROLE_ADMIN')==true %}
+                                    <a href=" {{ path('app_admin_dashboard') }}">Admin</a>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="logoResponsive"><a href="{{ path('app_home') }}"><img src="{{ asset('media/logo.png') }}"
+                            alt="logo"></a>
+                </div>
+            </nav>
+
+        </header>
+        <main>
+           
+           
+                {% block body %} {% endblock %}
+           
+           
+        </main>
+        <footer>
+            <p><a href="{{ path('app_contact') }}" target="_blank">nous contacter</a> </p>
+
+
+            <div id="reseaux">
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-square-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+
+            <div class="documents">
+                <a href="{{ asset('media/cgv.pdf') }}">CGV</a>
+                <a href="{{ asset('media/mentions_legales.pdf') }}">Mentions légales</a>
+                <a href="{{ asset('media/politique_de_confidentialite.pdf') }}">Politiques de confidentialité</a>
+            </div>
+            <div class="copyright text-white">&copy; Copyright</p>
+            </div>
+
+        </footer>
+
+
+
+
+    </div>
+
+    {# lien javascript #}
+    <script src="{{ asset('js/index.js') }}"></script>
+    {# lien javascript boostrap #}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

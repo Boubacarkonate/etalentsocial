@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Anoonces{% endblock %}
+
+{% block body %}
+
+ {% for flashMessage in app.flashes('succes') %}
+    <div class="alert alert-succes alert-dismissible fade show" role="alert">
+        {{ flashMessage }} 
+       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> 
+    </div> 
+    {% endfor %}
+ {% for flashMessage in app.flashes('danger') %}
+    <div class="alert alert-succes alert-dismissible fade show" role="alert">
+        {{ flashMessage }} 
+       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> 
+    </div> 
+    {% endfor %}
+
+    <h1>AnnonceEmploi index</h1>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+               
+                <th>Poste recherché</th>
+                <th>Description</th>
+                <th>Localisation</th>
+                <th>Création de l'annonce</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for annonce_emploi in annonce %}
+            <tr>
+                
+                <td>{{ annonce_emploi.job }}</td>
+                <td>{{ annonce_emploi.description }}</td>
+                <td>{{ annonce_emploi.localization }}</td>
+                <td>{{ annonce_emploi.createdAt ? annonce_emploi.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_annonce_emploi_show', {'id': annonce_emploi.id}) }}">voir l'annonce</a>
+                    <a href="{{ path('app_annonce_emploi_edit', {'id': annonce_emploi.id}) }}">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+    <a href="{{ path('app_annonce_emploi_new') }}">Créer une nouvelle annonce</a>
+
+    <p>  <a href=" {{ path('app_area_recruteur') }}">Retournez dans votre espace</a> </p>
+{% endblock %}

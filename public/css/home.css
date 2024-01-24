@@ -1,0 +1,307 @@
+
+    /*********************************************************************************
+    arrière du bouton
+    *********************************************************************************/
+
+
+    #fondEspaceMenu{                                              /*background de la section du bouton des espaces*/
+        background: radial-gradient(ellipse, #2f56da, white); 
+        clip-path: polygon(50% 0%, 100% 0, 100% 35%, 100% 60%, 80% 80%, 49% 90%, 20% 80%, 0 60%, 0% 35%, 0 0);
+        height: 65vh;
+    }
+    
+    #fondEspaceMenu h1{
+      text-align: center;
+      color: #00276b;
+      text-shadow:5px 5px 5px #ffffff; 
+      font-weight: 800;
+      padding-top: 1.5%;
+     }
+    #fondEspaceMenu p{
+      font-size: 120%;
+      text-align: center; 
+      color: white;
+      text-shadow:5px 5px 5px #275fa9; 
+     }
+
+    #blocEspaceMenu{                    /*conteneur du bouton espace*/
+      
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+     
+    }
+    
+    
+
+    
+    /**************************************************************************
+                                le bouton menu
+    *************************************************************************/
+        .conteneur-menu{
+          /* margin-top: 40px; */
+          width: 270px;
+          height: 270px;
+          border-radius: 50%;
+          position: relative;
+          /* left: 40%; */
+         
+          background-color: rgb(255, 255, 255);          /*modifier color bg...*/
+      }
+      
+      
+      
+      /* mon bouton principal qui pulse */
+      
+      .bouton-menu{
+          display: block;
+          width: 120px;         
+          height: 120px;           
+          border-radius: 50%;
+          background-color:#00276b;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+          z-index: 20;
+          cursor: pointer;
+          box-shadow: 0 0 0 0 grey;
+          animation: pulse 1.3s infinite;                 /* pulse = nom        vitesse de 1.3s à l'infini*/
+      }
+      
+      @keyframes pulse {
+          to {                                                                   
+              box-shadow: 0 0 0 18px rgba(0, 0, 0, 0.01);             /* ajout  d'une ombre quasi transparent en mode onde s'étalant*/
+          }
+      }
+      
+      .selectionEspace{
+          text-align: center;
+          color: white;
+          font-weight: 600;
+          width: 40px;
+          height: 5px;
+          border-radius: 5px;
+          position: absolute;
+          top: 26%;
+          left: 50%;
+          transform: translate(-60%,-300%);
+      }
+      
+      
+      
+      
+      /*représente les sphères des sous-boutons*/
+      .boule{
+          width: 120px;         
+          height: 120px;        
+          border-radius: 50%;
+          background-color: rgb(21, 0, 71);
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+      
+      .boule a{
+          text-decoration: none;
+          
+      }
+      
+      
+      /* animation hover sur mes sous-boutons à mettre avec le js*/
+      
+      .sous-bouton{
+          animation: mouvement 60s infinite;              /*je dois m'entraîner sur les animations avec les transition...*/
+      }
+      
+      @keyframes mouvement {
+          0% {
+              transform: translateX(10px)
+          }
+          20% {
+              transform: translateX(-10px);
+          }
+          40% {
+              transform: translateX(10px);
+          }
+          60% {
+              transform: translateX(-10px);
+          }
+          80% {
+              transform: translateX(10px);
+          }
+          100% {
+              transform: translateX(0px);
+          }
+      } 
+      
+      .recruteur{
+          background-color: rgb(255, 255, 255);
+          transition: all 0.5s 0.2s ease-in-out;
+      }
+      .candidat{
+          background-color: rgb(255, 255, 255);
+          transition: all 0.5s 0.4s ease-in-out;
+      }
+      .annonce{
+          background-color:rgb(255, 255, 255); 
+          transition: all 0.5s 0.6s ease-in-out;
+      }
+      
+      
+      /*animation sous menus*/
+      
+      .conteneur-menu.active .recruteur{
+          left: 120%;
+         
+      }
+      
+      .conteneur-menu.active .candidat{
+          left: -20%;
+          top: 50%;
+          
+      }
+      
+      .conteneur-menu.active .annonce{
+          left: 50%;
+          top: 0;
+         
+      }
+
+      
+    /**************************************************************************
+                        section des differents metiers
+    *****************************************************************************/
+    .container{
+        display: grid;
+        gap: 100px;              /*le grid + gap permet d'espacer mes sections*/
+    }
+   
+    .container h2{                                 /*tous les h2 de la page sont centrés*/
+        text-align: center;
+        color: #00276b;
+        font-weight: 800;
+        margin-bottom: 25px;
+    }
+
+    .container h2+p{
+        margin-bottom: 30px;
+    }
+
+    .container i{
+        color: #00276b;
+    }
+
+    .container h3{
+        color: #00276b;
+        
+    }
+
+    .paragraphe3mots{
+        text-align: center;
+  
+    }
+   
+    .resume{
+        text-align: justify;
+    }
+    .metierDuSocial{
+        text-align: center;
+    }
+
+    iframe{
+          
+        border-radius: 10%;
+    } 
+  article a{
+      color: black;
+      text-decoration: none;
+      
+  }
+
+ 
+  article a:hover{
+    animation: myAnim 1s ease 0s 1 normal forwards;
+}
+@keyframes myAnim {
+	0% {
+		box-shadow: 0 0 0 0 #275fa9;
+	}
+
+	100% {
+		box-shadow: 0 0 20px 0px rgb(90, 121, 226);
+	}
+
+}
+
+/*************************************************************************
+        COMMENTAIRES
+************************************************************************/
+    .commentaire{
+        text-align: center;
+    }
+
+
+/**************************************************************
+    A PROPOS
+**************************************************************/
+    .about{
+        border:none;
+    }
+    .about p img {
+        width: 5rem;
+        margin-bottom: 12px;
+    }
+    
+   
+p{
+    /* color: #0e35b5; */
+    color: #020613;
+}
+    
+
+    #fondBasPage{
+        background: radial-gradient(ellipse, #2f56da, white); 
+        clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 100% 100%, 0 100%, 0% 60%, 10% 20%);
+        height: 5vh;
+    }
+
+/****************************************************************************
+            Média queries
+*********************************************************************************/
+
+@media all and (max-width: 769px) {
+        #fondBasPage{
+            display: none;
+        } 
+        #fondEspaceMenu{
+            height: 23vh;
+        }
+        #fondEspaceMenu p{
+            display: none;
+        }
+        #blocEspaceMenu{
+            display: none;
+        }
+
+        .paragraphe3mots {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+           
+        }
+
+        .breakpointCard{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+    }    
+
+
+    
