@@ -18,4 +18,11 @@ Avant de commencer, assurez-vous que vous avez les éléments suivants installé
 
 ```bash
 git clone https://github.com/Boubacarkonate/etalentsocial.git
-cd votre-repo
+
+```
+### Usage
+
+```bash
+cd etalentsocial
+composer install
+symfony serve
